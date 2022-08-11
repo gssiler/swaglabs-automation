@@ -42,4 +42,33 @@ public class SwagLabsTests extends SwagLabsTestBase{
 
 		assertEquals(item, itemInCart, "The expected item does not match the item in the cart.");
 	}
+
+	@Test
+	public void canCompleteCheckoutWithSauceLabsOnesie() {
+
+		String userName = "standard_user";
+		String password = "secret_sauce";
+		String item = "Sauce Labs Onesie";
+		String firstName = "John";
+		String lastName = "Doe";
+		String postalCode = "13579";
+		String expectedConfirmation = "CHECKOUT: COMPLETE!";
+
+		String actualConfirmation = new HomePage(getDriver(), getBaseUrl())
+				.navigate()
+				.enterUserName(userName)
+				.enterPassword(password)
+				.clickLoginButton()
+				.addItemToCart(item)
+				.viewCart()
+				.clickCheckoutButton()
+				.enterFirstName(firstName)
+				.enterLastName(lastName)
+				.enterPostalCode(postalCode)
+				.clickContinueButton()
+				.clickFinishButton()
+				.checkoutConfirmation();
+
+		assertEquals(expectedConfirmation, actualConfirmation, "Purchase was not successful. Please try again.");
+	}
 }

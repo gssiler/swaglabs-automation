@@ -13,6 +13,10 @@ public class CartPage extends PageObjectBase{
 	@FindBy(xpath = "//div[@class='inventory_item_name']")
 	private WebElement itemTitle;
 
+	@CacheLookup
+	@FindBy(xpath = "//button[@name='checkout']")
+	private WebElement checkoutButton;
+
 	public CartPage(WebDriver driver, String baseUrl) {
 		super(driver, baseUrl);
 	}
@@ -22,6 +26,13 @@ public class CartPage extends PageObjectBase{
 		String item = itemTitle.getText();
 
 		return item;
+	}
+
+	public CheckoutPage clickCheckoutButton() {
+
+		elementControl.clickElement(checkoutButton);
+
+		return new CheckoutPage(getDriver(), getRelativeUrl());
 	}
 
 	@Override

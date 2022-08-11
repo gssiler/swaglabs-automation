@@ -75,6 +75,7 @@ public class ProductsPage extends PageObjectBase {
 	}
 
 	public CartPage viewCart() {
+
 		elementControl.clickElement(viewCart);
 
 		return new CartPage(getDriver(), getRelativeUrl());
