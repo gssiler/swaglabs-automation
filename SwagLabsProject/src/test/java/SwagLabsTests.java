@@ -23,4 +23,23 @@ public class SwagLabsTests extends SwagLabsTestBase{
 
 		assertEquals(expectedUrl, currentUrl, "The expected url does not match the current url.");
 	}
+
+	@Test
+	public void canAddSauceLabsBackpackToCart() {
+
+		String userName = "standard_user";
+		String password = "secret_sauce";
+		String item = "Sauce Labs Backpack";
+
+		String itemInCart = new HomePage(getDriver(), getBaseUrl())
+				.navigate()
+				.enterUserName(userName)
+				.enterPassword(password)
+				.clickLoginButton()
+				.addItemToCart(item)
+				.viewCart()
+				.retrieveItemTitle();
+
+		assertEquals(item, itemInCart, "The expected item does not match the item in the cart.");
+	}
 }
