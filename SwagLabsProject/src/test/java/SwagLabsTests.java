@@ -71,4 +71,21 @@ public class SwagLabsTests extends SwagLabsTestBase{
 
 		assertEquals(expectedConfirmation, actualConfirmation, "Purchase was not successful. Please try again.");
 	}
+
+	@Test
+	public void cannotLogInWithLockedAccount() {
+
+		String userName = "locked_out_user";
+		String password = "secret_sauce";
+		String expectedErrorMessage = "Epic sadface: Sorry, this user has been locked out.";
+
+		String actualErrorMessage = new HomePage(getDriver(), getBaseUrl())
+				.navigate()
+				.enterUserName(userName)
+				.enterPassword(password)
+				.clickLoginButton()
+				.retrieveErrorMessage();
+
+		assertEquals(expectedErrorMessage, actualErrorMessage, "Login Successful.");
+	}
 }

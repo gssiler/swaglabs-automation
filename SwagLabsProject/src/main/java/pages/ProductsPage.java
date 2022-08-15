@@ -37,6 +37,10 @@ public class ProductsPage extends PageObjectBase {
 	@FindBy(xpath = "//a[@class='shopping_cart_link']")
 	private WebElement viewCart;
 
+	@CacheLookup
+	@FindBy(xpath = "//h3[@data-test='error']")
+	private WebElement errorMessage;
+
 	public ProductsPage(WebDriver driver, String baseUrl) {
 		super(driver, baseUrl);
 	}
@@ -79,6 +83,13 @@ public class ProductsPage extends PageObjectBase {
 		elementControl.clickElement(viewCart);
 
 		return new CartPage(getDriver(), getRelativeUrl());
+	}
+
+	public String retrieveErrorMessage() {
+		String error = errorMessage.getText();
+		System.out.println(error);
+
+		return error;
 	}
 
 	@Override
